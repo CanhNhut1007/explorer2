@@ -1,0 +1,143 @@
+{
+    "name": "first-network",
+    "version": "1.0.0",
+    "license": "Apache-2.0",
+    "client": {
+        "tlsEnable": true,
+        "adminCredential": {
+            "id": "exploreradmin",
+            "password": "exploreradminpw"
+        },
+        "enableAuthentication": true,
+        "organization": ["ThuDucHospitalMSP","GoVapHospitalMSP"],
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                },
+                "orderer": "300"
+            }
+        }
+    },
+    "channels": {
+        "hospitalchannel": {
+            "peers": {
+                "peer1-thuduchospital": {},
+				"peer2-thuduchospital": {},
+				"peer1-govaphospital": {},
+				"peer2-govaphospital": {}
+            },
+            "connection": {
+                "timeout": {
+                    "peer": {
+                        "endorser": "6000",
+                        "eventHub": "6000",
+                        "eventReg": "6000"
+                    }
+                }
+            }
+        }
+    },
+    "organizations": {
+        "ThuDucHospitalMSP": {
+            "mspid": "ThuDucHospitalMSP",
+            "adminPrivateKey": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/Admin@ThuDucHospital-key.pem"
+            },
+            "peers": ["peer1-thuduchospital","peer2-thuduchospital"],
+            "signedCert": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/Admin@ThuDucHospital-cert.pem"
+            }
+        },
+		"GoVapHospitalMSP": {
+            "mspid": "GoVapHospitalMSP",
+            "adminPrivateKey": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/Admin@GoVapHospital-key.pem"
+            },
+            "peers": ["peer1-govapchospital","peer2-govapchospital"],
+            "signedCert": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/Admin@GoVapHospital-cert.pem"
+            }
+        }
+    },
+    "peers": {
+        "peer1-thuduchospital": {
+            "tlsCACerts": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/tlscacert.pem"
+            },
+            "url": "grpcs://10.102.10.226:30751",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1-thuduchospital"
+            }
+        },
+		"peer2-thuduchospital": {
+            "tlsCACerts": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/tlscacert.pem"
+            },
+            "url": "grpcs://10.102.10.226:31751",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer2-thuduchospital"
+            }
+        },
+		"peer1-govaphospital": {
+            "tlsCACerts": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/tlscacert.pem"
+            },
+            "url": "grpcs://10.102.10.229:30851",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1-govaphospital"
+            }
+        },
+		"peer2-govaphospital": {
+            "tlsCACerts": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/tlscacert.pem"
+            },
+            "url": "grpcs://10.102.10.229:31851",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer2-govaphospital"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca1.ThuDucHospital": {
+            "url": "https://10.102.10.229:7054",
+            "httpOptions": {
+                "verify": false
+            },
+            "tlsCACerts": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/ThuDucHospital-cacert-1.pem"
+            },
+            "caName": "ca1.ThuDucHospital"
+        },
+		"ca2.ThuDucHospital": {
+            "url": "https://10.102.10.229:7154",
+            "httpOptions": {
+                "verify": false
+            },
+            "tlsCACerts": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/ThuDucHospital-cacert-2.pem"
+            },
+            "caName": "ca2.ThuDucHospital"
+        },
+		"ca1.GoVapHospital": {
+            "url": "https://10.102.10.229:7055",
+            "httpOptions": {
+                "verify": false
+            },
+            "tlsCACerts": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/GoVapHospital-cacert-1.pem"
+            },
+            "caName": "ca1.GoVapHospital"
+        },
+		"ca2.GoVapHospital": {
+            "url": "https://10.102.10.229:7155",
+            "httpOptions": {
+                "verify": false
+            },
+            "tlsCACerts": {
+                "path": "/opt/explorer/app/platform/fabric/connection-profile/GoVapHospital-cacert-2.pem"
+            },
+            "caName": "ca2.GoVapHospital"
+        }
+    }
+}
